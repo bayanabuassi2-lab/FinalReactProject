@@ -1,5 +1,11 @@
+.custom-table-container {
+  width: 80% !important;
+  margin: 30px auto !important;
+  display: block !important;
+}
+
 .custom-table {
-  width: 100%;
+  width: 100% !important;
   border-collapse: collapse;
 }
 

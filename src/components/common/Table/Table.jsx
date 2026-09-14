@@ -15,8 +15,11 @@ const CustomTable = ({
   className = "",
 }) => {
   return (
-    <TableContainer component={Paper}>
-      <Table className={`custom-table ${className}`}>
+    <TableContainer
+  component={Paper}
+  className="custom-table-container"
+>
+  <Table className={`custom-table ${className}`}>
         <TableHead>
           <TableRow>
             {columns.map((column) => (
