@@ -1,0 +1,9 @@
+.view-link {
+  color: #1976d2;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.view-link:hover {
+  text-decoration: underline;
+}
