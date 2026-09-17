@@ -1,0 +1,29 @@
+.review-dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding-top: 15px;
+}
+
+.review-notes {
+  width: 100%;
+  min-height: 110px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+}
+
+.review-notes:focus {
+  outline: none;
+  border-color: #1976d2;
+}
+
+.review-notes:read-only {
+  background-color: #fafafa;
+  color: #444;
+  resize: none;
+}

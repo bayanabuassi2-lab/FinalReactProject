@@ -1,0 +1,31 @@
+.search-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom:  80px;
+  flex-wrap: wrap;
+}
+
+.search-button {
+  height: 56px;
+  padding: 0 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  border: none;
+  border-radius: 5px;
+
+  background-color: #1976d2;
+  color: white;
+
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #1565c0;
+}

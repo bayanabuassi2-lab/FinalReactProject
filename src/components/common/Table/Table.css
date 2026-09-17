@@ -1,0 +1,29 @@
+.custom-table-container {
+  width: 80% !important;
+  margin: 30px auto !important;
+  display: block !important;
+}
+
+.custom-table {
+  width: 100% !important;
+  border-collapse: collapse;
+}
+
+.custom-table .MuiTableHead-root {
+  background-color: #1976d2;
+}
+
+.custom-table .MuiTableHead-root .MuiTableCell-root {
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.custom-table .MuiTableBody-root .MuiTableRow-root:hover {
+  background-color: #f5f5f5;
+}
+
+.custom-table .MuiTableCell-root {
+  padding: 12px 16px;
+  font-size: 15px;
+}
