@@ -1,50 +1,56 @@
+import { useMemo } from "react";
+
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import StarIcon from "@mui/icons-material/Star";
 
 import Table from "../../common/Table/Table";
 import "./DoctorTable.css";
+
 const DoctorTable = ({
   doctors,
   onOverview,
   onReview,
 }) => {
-  const columns = [
-    {
-      id: "name",
-      label: "Name",
-    },
-    {
-      id: "specialization",
-      label: "Specialization",
-    },
-    {
-      id: "region",
-      label: "Region",
-    },
-    {
-      id: "actions",
-      label: "Actions",
-      render: (doctor) => (
-        <div className="actions">
-          <button
-            className="action-button"
-            title="Overview"
-            onClick={() => onOverview(doctor)}
-          >
-            <VisibilityIcon />
-          </button>
+  const columns = useMemo(
+    () => [
+      {
+        id: "name",
+        label: "Name",
+      },
+      {
+        id: "specialization",
+        label: "Specialization",
+      },
+      {
+        id: "region",
+        label: "Region",
+      },
+      {
+        id: "actions",
+        label: "Actions",
+        render: (doctor) => (
+          <div className="actions">
+            <button
+              className="action-button"
+              title="Overview"
+              onClick={() => onOverview(doctor)}
+            >
+              <VisibilityIcon />
+            </button>
 
-          <button
-            className="action-button"
-            title="Review"
-            onClick={() => onReview(doctor)}
-          >
-            <StarIcon />
-          </button>
-        </div>
-      ),
-    },
-  ];
+            <button
+              className="action-button"
+              title="Review"
+              onClick={() => onReview(doctor)}
+            >
+              <StarIcon />
+            </button>
+          </div>
+        ),
+      },
+    ],
+    [onOverview, onReview]
+  );
 
   return (
     <Table

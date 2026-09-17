@@ -63,6 +63,28 @@ describe("Doctor Overview", () => {
     cy.get("table")
       .should("be.visible");
   });
+ it("should display the correct average rating", () => {
+
+    cy.get("tbody tr")
+      .contains("Dr. Sara Mahmoud")
+      .parents("tr")
+      .within(() => {
+
+        cy.get('button[title="Overview"]')
+          .click();
+
+      });
+
+    cy.url()
+      .should("include", "/doctor/");
+
+    cy.contains("Dr. Sara Mahmoud")
+      .should("be.visible");
+
+    cy.get('[data-testid="average-rating"]')
+      .should("be.visible")
+      .and("have.text", "2.8333333333333335");
+  });
 
 
   it("should display review table headers", () => {

@@ -38,6 +38,10 @@ function AverageRating({ reviews }) {
         precision={0.5}
         readOnly
       />
+
+      <span data-testid="average-rating">
+        {averageRating}
+      </span>
     </div>
   );
 }

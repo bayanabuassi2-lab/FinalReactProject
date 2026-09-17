@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 import Rating from "@mui/material/Rating";
-import Button from "@mui/material/Button";
 
 import "./ReviewDialog.css";
 import "../../Dialog/Dialog.css";
@@ -18,7 +22,10 @@ const ReviewDialog = ({
   const [stars, setStars] = useState(0);
   const [notes, setNotes] = useState("");
 
-  const readOnly = mode === "view";
+  const readOnly = useMemo(
+    () => mode === "view",
+    [mode]
+  );
 
   useEffect(() => {
     if (open) {
@@ -27,49 +34,29 @@ const ReviewDialog = ({
     }
   }, [open, review]);
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     onSave({
       stars,
       notes,
       date: new Date().toISOString(),
     });
-  };
-
-  const actions = () => {
-    return (
-      <>
-        {!readOnly && (
-          <Button
-            variant="contained"
-            onClick={handleSave}
-            disabled={!stars || saving}
-          >
-            {saving ? "Saving..." : "Save"}
-          </Button>
-        )}
-
-        <Button
-          onClick={onClose}
-          disabled={saving}
-        >
-          Close
-        </Button>
-      </>
-    );
-  };
+  }, [onSave, stars, notes]);
 
   return (
     <Dialog
       open={open}
       title={readOnly ? "View Review" : "Review"}
       onClose={onClose}
+      onSave={handleSave}
       saving={saving}
-      actions={actions()}
+      showSave={!readOnly}
     >
       <div className="review-dialog-content">
         <Rating
           value={stars}
-          onChange={(event, newValue) => setStars(newValue)}
+          onChange={(event, newValue) =>
+            setStars(newValue)
+          }
           readOnly={readOnly}
           size="large"
         />
@@ -82,7 +69,9 @@ const ReviewDialog = ({
               : "Your notes (optional)"
           }
           value={notes}
-          onChange={(event) => setNotes(event.target.value)}
+          onChange={(event) =>
+            setNotes(event.target.value)
+          }
           readOnly={readOnly}
         />
       </div>
@@ -91,3 +80,4 @@ const ReviewDialog = ({
 };
 
 export default ReviewDialog;
+

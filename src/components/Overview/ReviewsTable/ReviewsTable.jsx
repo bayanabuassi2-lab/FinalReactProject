@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 
 import Rating from "@mui/material/Rating";
-import TableSortLabel from "@mui/material/TableSortLabel";
 
 import Table from "../../common/Table/Table";
 
@@ -13,66 +12,48 @@ import {
 import "./ReviewsTable.css";
 
 const ReviewsTable = ({ reviews, onView }) => {
-
   const validReviews = useMemo(() => {
-
-    const filteredReviews = (reviews || [])
-      .filter(isValidReview);
-
-    return [...filteredReviews].sort((a, b) => {
-
-      const dateA = new Date(a.date);
-      const dateB = new Date(b.date);
-
-      return dateB - dateA;
-
-    });
-
+    return (reviews || []).filter(isValidReview);
   }, [reviews]);
 
+  const columns = useMemo(
+    () => [
+      {
+        id: "date",
+        label: "Date",
+        defaultOrder: "desc",
+        sortValue: (review) => new Date(review.date),
+        render: (review) =>
+          new Date(review.date).toLocaleDateString(),
+      },
 
-  const columns = [
-    {
-      id: "date",
-      label: (
-        <TableSortLabel
-          active={true}
-          direction="desc"
-          hideSortIcon={false}
-        >
-          Date
-        </TableSortLabel>
-      ),
-      render: (review) =>
-        new Date(review.date).toLocaleDateString(),
-    },
+      {
+        id: "rating",
+        label: "Rating",
+        render: (review) => (
+          <Rating
+            value={getReviewStars(review)}
+            readOnly
+            size="small"
+          />
+        ),
+      },
 
-    {
-      id: "rating",
-      label: "Rating",
-      render: (review) => (
-        <Rating
-          value={getReviewStars(review)}
-          readOnly
-          size="small"
-        />
-      ),
-    },
-
-    {
-      id: "notes",
-      label: "Notes",
-      render: (review) => (
-        <span
-          className="view-link"
-          onClick={() => onView(review)}
-        >
-          View
-        </span>
-      ),
-    },
-  ];
-
+      {
+        id: "notes",
+        label: "Notes",
+        render: (review) => (
+          <span
+            className="view-link"
+            onClick={() => onView(review)}
+          >
+            View
+          </span>
+        ),
+      },
+    ],
+    [onView]
+  );
 
   return (
     <Table
